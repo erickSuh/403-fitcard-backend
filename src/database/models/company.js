@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasOne(models.category, {
-        foreignKey: 'companyId',
+        foreignKey: 'id',
         as: 'fg_company',
       })
     }
