@@ -1,0 +1,26 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "simple-import-sort/sort": "warn"
+  },
+  "ignorePatterns": "build"
+}
