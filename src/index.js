@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*') // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', '*')
   next()
 })
@@ -67,6 +67,6 @@ app.post('/companies', async (req, res) => {
   }
 })
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('App is listening on port 5000!')
 })
