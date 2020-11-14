@@ -7,12 +7,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      this.hasOne(models.category, {
-        foreignKey: 'companyId',
-        as: 'fg_company',
-      })
-    }
+    static associate(models) {}
   }
   company.init(
     {
@@ -22,11 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       address: DataTypes.STRING,
       city: DataTypes.STRING,
-      state: DataTypes.STRING,
+      state: DataTypes.INTEGER,
+      ddd: DataTypes.STRING,
       phone: DataTypes.STRING,
-      status: DataTypes.BOOLEAN,
+      active: DataTypes.BOOLEAN,
       agency: DataTypes.STRING,
       account: DataTypes.STRING,
+      categoryId: DataTypes.INTEGER,
     },
     {
       sequelize,

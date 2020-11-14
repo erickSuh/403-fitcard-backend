@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
@@ -9,10 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, {
-        foreignKey: 'companyId',
-        as: 'fg_company',
-      })
+      // this.belongsTo(models.company, {
+      //   foreignKey: 'id',
+      //   as: 'fg_company',
+      // })
     }
   }
   category.init(
