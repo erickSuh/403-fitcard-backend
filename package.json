@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js",
-    "build": "tsc"
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
