@@ -26,12 +26,19 @@ module.exports = {
         type: Sequelize.STRING,
       },
       state: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'states', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      ddd: {
         type: Sequelize.STRING,
       },
       phone: {
         type: Sequelize.STRING,
       },
-      status: {
+      active: {
         type: Sequelize.BOOLEAN,
       },
       agency: {
@@ -40,7 +47,7 @@ module.exports = {
       account: {
         type: Sequelize.STRING,
       },
-      companyId: {
+      categoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'categories', key: 'id' },

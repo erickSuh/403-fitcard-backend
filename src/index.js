@@ -4,10 +4,16 @@ const bodyParser = require('body-parser')
 // Create a new express app instance
 const app = express()
 
-const { category } = require('./database/models')
+const { category, state, company } = require('./database/models')
 
 app.use(morgan('dev'))
 app.use(bodyParser.json())
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*') // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Headers', '*')
+  next()
+})
 
 app.get('/', async (req, res) => {
   res.send('Hello World!')
@@ -25,10 +31,34 @@ app.get('/categories', async (req, res) => {
   }
 })
 
-app.post('/company', async (req, res) => {
+app.get('/states', async (req, res) => {
   try {
-    const categories = await category.create(req.body)
-    res.send(categories)
+    const states = await state.findAll()
+    res.send(states)
+  } catch (e) {
+    res.send({
+      status: 500,
+      error: e,
+    })
+  }
+})
+
+app.get('/companies', async (req, res) => {
+  try {
+    const resp = await company.findAll()
+    res.send(resp)
+  } catch (e) {
+    res.send({
+      status: 500,
+      error: e,
+    })
+  }
+})
+
+app.post('/companies', async (req, res) => {
+  try {
+    const resp = await company.create(req.body)
+    res.send(resp)
   } catch (e) {
     res.send({
       status: 500,
