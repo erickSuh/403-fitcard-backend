@@ -1,4 +1,4 @@
-const { Model } = require('sequelize')
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class state extends Model {
@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {}
+    static associate(models) {
+      this.hasMany(models.company, {
+        foreignKey: 'state',
+        as: 'stateAssociation',
+      });
+    }
   }
   state.init(
     {
@@ -17,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'state',
-    }
-  )
-  return state
-}
+    },
+  );
+  return state;
+};
