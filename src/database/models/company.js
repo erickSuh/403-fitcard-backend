@@ -1,4 +1,4 @@
-const { Model } = require('sequelize')
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class company extends Model {
@@ -7,7 +7,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {}
+    static associate(models) {
+      this.belongsTo(models.state, {
+        foreignKey: 'state',
+        as: 'stateAssociation',
+      });
+
+      this.belongsTo(models.category, {
+        foreignKey: 'categoryId',
+        as: 'categoryAssociation',
+      });
+    }
   }
   company.init(
     {
@@ -28,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'company',
-    }
-  )
+    },
+  );
 
-  return company
-}
+  return company;
+};
