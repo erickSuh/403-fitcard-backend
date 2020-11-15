@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', '*')
+  res.header('Access-Control-Allow-Methods', '*')
   next()
 })
 
@@ -59,6 +60,63 @@ app.post('/companies', async (req, res) => {
   try {
     const resp = await company.create(req.body)
     res.send(resp)
+  } catch (e) {
+    res.send({
+      status: 500,
+      error: e,
+    })
+  }
+})
+
+app.get('/companies/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const resp = await company.findByPk(id)
+    res.send(resp)
+  } catch (e) {
+    res.send({
+      status: 500,
+      error: e,
+    })
+  }
+})
+
+app.patch('/companies/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const found = await company.findByPk(id)
+    if (!found.id) {
+      res.send({
+        status: 500,
+        error: 'Id dont exist',
+      })
+      return
+    }
+
+    const resp = await found.update(req.body)
+    res.send(resp)
+  } catch (e) {
+    res.send({
+      status: 500,
+      error: e,
+    })
+  }
+})
+
+app.delete('/companies/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const found = await company.findByPk(id)
+    if (!found.id) {
+      res.send({
+        status: 500,
+        error: 'Id dont exist',
+      })
+      return
+    }
+
+    await found.destroy()
+    res.send({ status: 200 })
   } catch (e) {
     res.send({
       status: 500,
